@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huambo Plateau Geopark - Your Place in History</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'huambo-red': '#8B3A3A',
+                        'huambo-green': '#2E5D38',
+                        'huambo-dark': '#1a1a1a',
+                        'huambo-gray': '#f9f9f9',
+                    },
+                    fontFamily: {
+                        sans: ['Open Sans', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "url('https://alparviagens.com/wp-content/uploads/2025/05/huambo-Alparviagens-turismo-Angola-1024x562.jpg')",
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://alparviagens.com/wp-content/uploads/2025/05/huambo-Alparviagens-turismo-Angola-1024x562.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+        }
+
+        .nav-scrolled {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-scrolled a {
+            color: #1a1a1a;
+        }
+
+        .story-card-stack {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            height: 600px;
+        }
+
+        .story-card {
+            position: absolute;
+            width: 300px;
+            height: 450px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+        }
+
+        .story-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .story-card.left {
+            transform: translateX(-150px) rotate(-5deg);
+            z-index: 1;
+        }
+
+        .story-card.center {
+            transform: scale(1.1);
+            z-index: 2;
+            height: 500px;
+            width: 340px;
+        }
+
+        .story-card.right {
+            transform: translateX(150px) rotate(5deg);
+            z-index: 1;
+        }
+
+        .story-card:hover {
+            transform: scale(1.05) translateY(-10px);
+            z-index: 3;
+        }
+
+        .story-card.center:hover {
+            transform: scale(1.15);
+        }
+
+        .plan-card {
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            height: 400px;
+            group: cursor-pointer;
+        }
+
+        .plan-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .plan-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .plan-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            color: white;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background-color: #8B3A3A;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .footer-link {
+            color: #666;
+            font-size: 0.875rem;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: #8B3A3A;
+            text-decoration: underline;
+        }
+
+        .separator {
+            color: #ddd;
+            margin: 0 4px;
+        }
+
+        /* Mobile Menu */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .mobile-menu-open {
+            transform: translateX(0);
+        }
+
+        .mobile-menu-closed {
+            transform: translateX(100%);
+        }
+
+        /* Search Popup */
+        #search-popup {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .search-popup-visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .search-popup-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Video Modal */
+        #video-modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .video-modal-visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .video-modal-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Scroll Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="text-gray-800 antialiased overflow-x-hidden">
+
+    <!-- Search Popup -->
+    <div id="search-popup"
+        class="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm search-popup-hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-lg p-6 relative transform transition-all scale-100">
+            <button onclick="toggleSearch()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+            <h3 class="text-xl font-bold text-huambo-dark mb-4">Search Geopark</h3>
+            <form class="flex items-center border-b-2 border-huambo-red pb-2">
+                <input type="text" placeholder="What are you looking for?"
+                    class="w-full outline-none text-gray-700 placeholder-gray-400">
+                <button type="submit" class="text-huambo-red font-bold uppercase text-sm">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div id="video-modal"
+        class="fixed inset-0 z-[70] bg-black/90 backdrop-blur-md video-modal-hidden flex items-center justify-center p-4">
+        <div class="relative w-full max-w-5xl aspect-video bg-black rounded-lg overflow-hidden shadow-2xl">
+            <button onclick="closeVideo()"
+                class="absolute top-4 right-4 text-white hover:text-huambo-red z-10 bg-black/50 rounded-full p-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+            <iframe id="youtube-frame" class="w-full h-full" src="" title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center space-x-2">
+                <img src="https://image.qwenlm.ai/public_source/b8c1e2d5-c06b-443d-8fc4-bbe02151029a/102dd84d3-4130-4d7d-8fd4-7ead2f44c47a.png"
+                    alt="Logo" class="h-10 w-10 rounded-full bg-white p-1">
+                <div class="text-white font-heading font-bold text-lg leading-tight nav-text">
+                    HUAMBO PLATEAU<br><span class="text-sm font-normal tracking-widest">GEOPARK</span>
+                </div>
+            </div>
+
+            <!-- Desktop Links -->
+            <div class="hidden lg:flex space-x-8 text-sm font-semibold tracking-wide nav-text">
+                <a href="#" class="hover:text-huambo-red transition">VISIT</a>
+                <a href="#" class="hover:text-huambo-red transition">EXPERIENCE</a>
+                <a href="#" class="hover:text-huambo-red transition">PLANNING</a>
+                <a href="#" class="hover:text-huambo-red transition">LEARNING</a>
+                <a href="#" class="hover:text-huambo-red transition">AGENDA</a>
+                <a href="#" class="hover:text-huambo-red transition">TERRITORY</a>
+            </div>
+
+            <!-- Icons -->
+            <div class="flex items-center space-x-6 nav-text">
+                <button onclick="toggleSearch()" class="hover:text-huambo-red"><svg class="w-5 h-5" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg></button>
+                <button class="hover:text-huambo-red hidden md:block"><svg class="w-5 h-5" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                    </svg></button>
+                <button class="hover:text-huambo-red hidden md:block"><svg class="w-5 h-5" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg></button>
+                <button class="font-bold hover:text-huambo-red">EN</button>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden hover:text-huambo-red">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-white mobile-menu-closed lg:hidden flex flex-col pt-24 px-6">
+        <button onclick="toggleMobileMenu()" class="absolute top-6 right-6 text-gray-800">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        <a href="#" class="text-2xl font-bold text-gray-800 py-4 border-b border-gray-100">VISIT</a>
+        <a href="#" class="text-2xl font-bold text-gray-800 py-4 border-b border-gray-100">EXPERIENCE</a>
+        <a href="#" class="text-2xl font-bold text-gray-800 py-4 border-b border-gray-100">PLANNING</a>
+        <a href="#" class="text-2xl font-bold text-gray-800 py-4 border-b border-gray-100">LEARNING</a>
+        <a href="#" class="text-2xl font-bold text-gray-800 py-4 border-b border-gray-100">AGENDA</a>
+        <a href="#" class="text-2xl font-bold text-gray-800 py-4 border-b border-gray-100">TERRITORY</a>
+        <div class="mt-8 flex space-x-4">
+            <button class="text-gray-600">EN</button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero-section flex flex-col justify-center items-center text-center text-white relative">
+        <div class="z-10 px-4">
+            <h1 class="text-6xl md:text-8xl font-thin tracking-tighter mb-2">HUAMBO</h1>
+            <h1 class="text-7xl md:text-9xl font-bold tracking-tighter mb-6">GEOPARK</h1>
+            <p class="text-xl md:text-2xl font-light mb-12 tracking-wide">Your place in history</p>
+
+            <div class="animate-bounce mb-8">
+                <span class="text-sm font-semibold uppercase tracking-widest">Welcome!</span>
+            </div>
+
+            <div class="w-16 h-16 rounded-full border-2 border-white/30 border-dashed flex items-center justify-center mx-auto cursor-pointer hover:bg-white hover:text-huambo-red transition"
+                onclick="document.getElementById('explore-section').scrollIntoView({behavior: 'smooth'})">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </div>
+
+        <!-- UNESCO Logo -->
+        <div class="absolute bottom-10 left-10 hidden md:block">
+            <div class="border border-white/50 p-2 inline-block">
+                <div class="text-xs font-bold uppercase">UNESCO</div>
+                <div class="text-[10px]">Global Geopark</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Explore Section -->
+    <section id="explore-section" class="py-24 bg-white reveal">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2">
+                    <h2 class="text-4xl md:text-5xl font-light text-gray-500 mb-2">Explore the</h2>
+                    <h2 class="text-4xl md:text-5xl font-bold text-huambo-red mb-8">Huambo Geopark</h2>
+
+                    <div class="space-y-6 text-gray-600 leading-relaxed">
+                        <p>
+                            In this UNESCO Global Geopark candidate, there are hiking trails to explore, discover, and
+                            capture in the best photo albums of your memory. Fabulous routes to let the adventure flow
+                            on mountain bikes across the Central Plateau.
+                        </p>
+                        <p>
+                            Traditional villages that preserve and carry forward the memory of those who lived and live
+                            here into the future. Handicrafts, folklore, and traditions that continue to tell our story.
+                        </p>
+                        <p>
+                            And all of this, everything that is part of us and defines us, is kept here, preserved,
+                            waiting to be told and left as a legacy for generations to come.
+                        </p>
+                    </div>
+
+                    <button
+                        class="mt-10 bg-huambo-red text-white px-8 py-3 rounded-full shadow-lg hover:bg-red-800 transition transform hover:-translate-y-1">
+                        Experience
+                    </button>
+                </div>
+
+                <div class="lg:w-1/2 w-full">
+                    <!-- Added onclick to open video modal -->
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl aspect-video group cursor-pointer"
+                        onclick="openVideo()">
+                        <img src="https://www.jbmg-arquitectos.pt/xms/img/1600x/46438/cT05MCZmPXdlYnA/L08zbS8tME0zWnJTbS95eXNnakRabXNwM1pyU0ptczR5enEvd0d1TWtaM1NKN2ptc1NzbVNuRE1Lam0vNHl6NHNuU21qbjdzUnVaMzBqL1RqN2p5enRka3I.webp"
+                            alt="Huambo Landscape" class="w-full h-full object-cover">
+                        <div
+                            class="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/30 transition">
+                            <div
+                                class="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/50 group-hover:scale-110 transition duration-300">
+                                <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-6 right-6 text-white font-heading font-bold text-xl italic">
+                            Desafia-te!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Happening Section -->
+    <section class="py-24 bg-gray-50 reveal">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-light text-gray-500 mb-2">Happening at the</h2>
+            <h2 class="text-4xl md:text-5xl font-bold text-huambo-dark mb-16">Geopark</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Event 1 -->
+                <div class="group cursor-pointer">
+                    <div class="rounded-3xl overflow-hidden mb-4 shadow-lg aspect-[4/3]">
+                        <img src="https://i0.wp.com/viewsofangola.com/wp-content/uploads/2023/09/Huambo_Jesse_infor-15-scaled.jpg?resize=300%2C300&ssl=1"
+                            alt="Hiking"
+                            class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="text-huambo-red font-bold text-sm mb-2">29-03-2025 a 06-12-2025</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 group-hover:text-huambo-red transition">Annual
+                        Interpretive Visits Program 2025 – Discover Huambo All Year Round</h3>
+                    <button
+                        class="bg-white text-gray-800 px-6 py-2 rounded-full shadow-md hover:shadow-lg transition text-sm font-semibold">See
+                        more</button>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="group cursor-pointer">
+                    <div class="rounded-3xl overflow-hidden mb-4 shadow-lg aspect-[4/3]">
+                        <img src="https://colcacanyontours-arequipa.com/wp-content/uploads/2022/06/huambo2.jpg"
+                            alt="Volunteering"
+                            class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="text-huambo-red font-bold text-sm mb-2">16-06-2025 a 18-07-2025</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 group-hover:text-huambo-red transition">Volunteering
+                        at Huambo Geopark</h3>
+                    <button
+                        class="bg-white text-gray-800 px-6 py-2 rounded-full shadow-md hover:shadow-lg transition text-sm font-semibold">See
+                        more</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="py-24 bg-white overflow-hidden reveal">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-light text-gray-500">Create your own</h2>
+            <h2 class="text-4xl md:text-5xl font-bold text-huambo-dark">Story</h2>
+        </div>
+
+        <div class="story-card-stack">
+            <!-- Left Card -->
+            <div class="story-card left">
+                <img src="https://www.jornaleme.ao/wp-content/uploads/2025/01/Huambo.png" alt="Cathedral">
+            </div>
+
+            <!-- Center Card -->
+            <div class="story-card center">
+                <img src="https://welcometoangola.co.ao/wp-content/uploads/2021/10/Jardim-Huambo.jpg" alt="Viewpoint">
+                <div
+                    class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent text-white text-center">
+                    <h3 class="text-xl font-bold mb-2">The most<br>Instagrammable<br>places</h3>
+                    <button
+                        class="border border-white px-6 py-2 rounded-full text-sm hover:bg-white hover:text-black transition">See
+                        more</button>
+                </div>
+            </div>
+
+            <!-- Right Card -->
+            <div class="story-card right">
+                <img src="https://pordentrodaafrica.com/wp-content/uploads/2016/08/10620543_263271010463191_6480072355032308592_n-e1472647326318.jpg"
+                    alt="Rocks">
+            </div>
+        </div>
+    </section>
+
+    <!-- Plan Your Trip -->
+    <section class="py-24 bg-gray-50 relative reveal">
+        <div class="absolute inset-0 opacity-5 pointer-events-none"
+            style="background-image: radial-gradient(#8B3A3A 1px, transparent 1px); background-size: 30px 30px;"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-light text-gray-500">Plan</h2>
+                    <h2 class="text-4xl md:text-5xl font-bold text-huambo-dark">your Trip</h2>
+                </div>
+                <div class="md:w-1/3 mt-6 md:mt-0">
+                    <p class="text-gray-600">Discover the charms and hidden gems of this destination of unmissable
+                        beauty, adventure, history, and tradition.</p>
+                    <p class="text-gray-600 mt-2 font-semibold">Your trip starts here and now!</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- To Visit -->
+                <div class="plan-card group cursor-pointer">
+                    <img src="https://welcometoangola.co.ao/wp-content/uploads/2021/01/cms-image-000009649.jpg"
+                        alt="To Visit">
+                    <div class="plan-overlay">
+                        <h3 class="text-2xl font-bold mb-4">To Visit</h3>
+                        <button
+                            class="bg-white text-gray-900 px-6 py-2 rounded-full text-sm font-semibold self-start group-hover:bg-huambo-red group-hover:text-white transition">See
+                            more</button>
+                    </div>
+                </div>
+
+                <!-- To Experience -->
+                <div class="plan-card group cursor-pointer">
+                    <img src="https://www.uccla.pt/sites/default/files/styles/1160_x_480/public/imagens/noticias/ao_huambo_estufa-fria-huambo-1728x800_c.jpg?itok=v0z75hhy"
+                        alt="To Experience">
+                    <div class="plan-overlay">
+                        <h3 class="text-2xl font-bold mb-4">To Experience</h3>
+                        <button
+                            class="bg-white text-gray-900 px-6 py-2 rounded-full text-sm font-semibold self-start group-hover:bg-huambo-red group-hover:text-white transition">See
+                            more</button>
+                    </div>
+                </div>
+
+                <!-- Where to Eat -->
+                <div class="plan-card group cursor-pointer">
+                    <img src="https://www.conexaolusofona.org/wp-content/uploads/2019/02/moamba-de-galinha-1024x683.jpg"
+                        alt="Where to Eat">
+                    <div class="plan-overlay">
+                        <h3 class="text-2xl font-bold mb-4">Where to Eat</h3>
+                        <button
+                            class="bg-white text-gray-900 px-6 py-2 rounded-full text-sm font-semibold self-start group-hover:bg-huambo-red group-hover:text-white transition">See
+                            more</button>
+                    </div>
+                </div>
+
+                <!-- Where to Sleep -->
+                <div class="plan-card group cursor-pointer">
+                    <img src="https://www.hoteisangola.com/components/com_reservations/gallery/s1/hotels/large/g7/pululukwa%20-%20_o9a7572-1.jpg"
+                        alt="Where to Sleep">
+                    <div class="plan-overlay">
+                        <h3 class="text-2xl font-bold mb-4">Where to Sleep</h3>
+                        <button
+                            class="bg-white text-gray-900 px-6 py-2 rounded-full text-sm font-semibold self-start group-hover:bg-huambo-red group-hover:text-white transition">See
+                            more</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-white pt-16 pb-8 border-t border-gray-200">
+
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
+
+                <!-- Left Column: Brand & About -->
+                <div class="md:col-span-4 space-y-6">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="https://image.qwenlm.ai/public_source/b8c1e2d5-c06b-443d-8fc4-bbe02151029a/102dd84d3-4130-4d7d-8fd4-7ead2f44c47a.png"
+                            alt="Huambo Plateau Geopark Logo" class="h-16 w-16 object-contain">
+                        <div class="leading-tight">
+                            <h3 class="text-xl font-bold text-huambo-dark uppercase">Huambo Plateau</h3>
+                            <span class="text-sm font-semibold text-huambo-green tracking-widest">GEOPARK</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed text-justify">
+                        The Huambo Plateau Geopark, a territory of conservation, education, tourism, innovation and
+                        sustainable development, classified as a UNESCO Global Geopark candidate. We preserve the
+                        geological and cultural heritage of Angola's Central Highlands.
+                    </p>
+                </div>
+
+                <!-- Center Columns: Links -->
+                <div class="md:col-span-5 grid grid-cols-1 sm:grid-cols-3 gap-8">
+                    <!-- Column 1 -->
+                    <div>
+                        <h4 class="font-bold text-huambo-dark mb-4 text-sm uppercase tracking-wide">About Us</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#" class="footer-link">Who We Are</a></li>
+                            <li><a href="#" class="footer-link">Team</a></li>
+                            <li><a href="#" class="footer-link">Scientific Council</a></li>
+                            <li><a href="#" class="footer-link">UNESCO</a></li>
+                            <li><a href="#" class="footer-link">Documentation</a></li>
+                        </ul>
+                    </div>
+                    <!-- Column 2 -->
+                    <div>
+                        <h4 class="font-bold text-huambo-dark mb-4 text-sm uppercase tracking-wide">Visit</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#" class="footer-link">Where to Sleep</a></li>
+                            <li><a href="#" class="footer-link">Where to Eat</a></li>
+                            <li><a href="#" class="footer-link">Tourist Animation</a></li>
+                            <li><a href="#" class="footer-link">Points of Interest</a></li>
+                            <li><a href="#" class="footer-link">Geopark Routes</a></li>
+                        </ul>
+                    </div>
+                    <!-- Column 3 -->
+                    <div>
+                        <h4 class="font-bold text-huambo-dark mb-4 text-sm uppercase tracking-wide">Education</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#" class="footer-link">School to Geopark</a></li>
+                            <li><a href="#" class="footer-link">Geopark to School</a></li>
+                            <li><a href="#" class="footer-link">Educational Projects</a></li>
+                            <li><a href="#" class="footer-link">Animations</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right Column: Social Media -->
+                <div class="md:col-span-3">
+                    <h4 class="font-bold text-huambo-dark mb-6 text-sm uppercase tracking-wide text-right md:text-left">
+                        Social Networks</h4>
+                    <div class="flex flex-wrap gap-3 md:justify-start justify-center">
+                        <a href="#" class="social-icon" aria-label="Facebook">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="Instagram">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="Twitter/X">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="LinkedIn">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="YouTube">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Legal Links -->
+            <div
+                class="flex flex-wrap justify-center gap-4 mb-8 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                <a href="#" class="hover:text-huambo-red">Privacy Policy</a>
+                <span class="text-gray-300">|</span>
+                <a href="#" class="hover:text-huambo-red">Cookie Policy</a>
+                <span class="text-gray-300">|</span>
+                <a href="#" class="hover:text-huambo-red">Dispute Resolution</a>
+                <span class="text-gray-300">|</span>
+                <a href="#" class="hover:text-huambo-red">Complaints Book</a>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-center text-sm text-gray-500">
+                <p>&copy; 2024 Huambo Plateau Geopark. Developed by <span
+                        class="font-bold text-gray-700">HuamboTech</span></p>
+            </div>
+        </div>
+
+        <!-- Scroll to Top Button -->
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});"
+            class="fixed bottom-6 right-6 bg-huambo-green text-white p-3 rounded shadow-lg hover:bg-green-700 transition z-50">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18">
+                </path>
+            </svg>
+        </button>
+    </footer>
+
+    <script>
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('navbar');
+            const navText = document.querySelectorAll('.nav-text');
+
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scrolled');
+                navbar.classList.remove('py-6');
+                navbar.classList.add('py-4');
+                navText.forEach(el => el.classList.remove('text-white'));
+                navText.forEach(el => el.classList.add('text-gray-900'));
+            } else {
+                navbar.classList.remove('nav-scrolled');
+                navbar.classList.remove('py-4');
+                navbar.classList.add('py-6');
+                navText.forEach(el => el.classList.add('text-white'));
+                navText.forEach(el => el.classList.remove('text-gray-900'));
+            }
+        });
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('mobile-menu-closed')) {
+                menu.classList.remove('mobile-menu-closed');
+                menu.classList.add('mobile-menu-open');
+            } else {
+                menu.classList.remove('mobile-menu-open');
+                menu.classList.add('mobile-menu-closed');
+            }
+        }
+
+        // Search Popup Toggle
+        function toggleSearch() {
+            const popup = document.getElementById('search-popup');
+            if (popup.classList.contains('search-popup-hidden')) {
+                popup.classList.remove('search-popup-hidden');
+                popup.classList.add('search-popup-visible');
+            } else {
+                popup.classList.remove('search-popup-visible');
+                popup.classList.add('search-popup-hidden');
+            }
+        }
+
+        // Video Modal Functions
+        function openVideo() {
+            const modal = document.getElementById('video-modal');
+            const iframe = document.getElementById('youtube-frame');
+            // Set src with autoplay and start time (4 seconds)
+            iframe.src = "https://www.youtube.com/embed/Wapbvd2PLz4?autoplay=1&start=4";
+            modal.classList.remove('video-modal-hidden');
+            modal.classList.add('video-modal-visible');
+        }
+
+        function closeVideo() {
+            const modal = document.getElementById('video-modal');
+            const iframe = document.getElementById('youtube-frame');
+            // Clear src to stop video
+            iframe.src = "";
+            modal.classList.remove('video-modal-visible');
+            modal.classList.add('video-modal-hidden');
+        }
+
+        // Scroll Animation (Intersection Observer)
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal');
+            revealElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+
+</html>

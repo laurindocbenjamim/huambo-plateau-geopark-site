@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Open+Sans:wght@400;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-huambo-red: #8B3A3A;
+  --color-huambo-green: #2E5D38;
+  --color-huambo-dark: #1a1a1a;
+  --color-huambo-gray: #f9f9f9;
+}
+
+@layer base {
+  body {
+    @apply font-sans text-gray-800 antialiased overflow-x-hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+@layer utilities {
+  .hero-gradient {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://alparviagens.com/wp-content/uploads/2025/05/huambo-Alparviagens-turismo-Angola-1024x562.jpg');
+  }
+}

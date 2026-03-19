@@ -1,0 +1,47 @@
+{
+  "hero": {
+    "backgroundImages": [
+      "https://alparviagens.com/wp-content/uploads/2025/05/huambo-Alparviagens-turismo-Angola-1024x562.jpg",
+      "https://scontent.fopo6-1.fna.fbcdn.net/v/t39.30808-6/624551338_25638149145879981_1670129436102152614_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=13d280&_nc_ohc=g8wdjPY6CCgQ7kNvwFaxgb9&_nc_oc=AdqpLW7-eMm-Fzt0rVp9uF3rBNLr6G1pgSP8wfOWdtik6oh9HlyAkh6naqfJANPbLSeAROWNl2QG-FdVd98odED4&_nc_zt=23&_nc_ht=scontent.fopo6-1.fna&_nc_gid=K-dYkP5CDDBBhbDgBq_ofQ&_nc_ss=8&oh=00_Afzlaz-3vktIfwNWrU_S0-3flIZ4ra87NjApF2SmGCuq0w&oe=69C1E05B"
+    ],
+    "logo": "https://image.qwenlm.ai/public_source/b8c1e2d5-c06b-443d-8fc4-bbe02151029a/102dd84d3-4130-4d7d-8fd4-7ead2f44c47a.png"
+  },
+  "social": {
+    "facebook": "https://www.facebook.com/calei9/",
+    "youtube": "https://www.youtube.com/@geoparkhuambo",
+    "instagram": "#",
+    "twitter": "#",
+    "linkedin": "#"
+  },
+  "explore": {
+    "videoThumbnail": "https://www.jbmg-arquitectos.pt/xms/img/1600x/46438/cT05MCZmPXdlYnA/L08zbS8tME0zWnJTbS95eXNnakRabXNwM1pyU0ptczR5enEvd0d1TWtaM1NKN2ptc1NzbVNuRE1Lam0vNHl6NHNuU21qbjdzUnVaMzBqL1RqN2p5enRka3I.webp",
+    "videoUrl": "https://www.youtube.com/embed/F3rRb72jAn8?autoplay=1&start=8"
+  },
+  "happening": [
+    {
+      "image": "https://i0.wp.com/viewsofangola.com/wp-content/uploads/2023/09/Huambo_Jesse_infor-15-scaled.jpg?resize=300%2C300&ssl=1"
+    },
+    {
+      "image": "https://colcacanyontours-arequipa.com/wp-content/uploads/2022/06/huambo2.jpg"
+    }
+  ],
+  "story": {
+    "left": "https://www.jornaleme.ao/wp-content/uploads/2025/01/Huambo.png",
+    "center": "https://welcometoangola.co.ao/wp-content/uploads/2021/10/Jardim-Huambo.jpg",
+    "right": "https://pordentrodaafrica.com/wp-content/uploads/2016/08/10620543_263271010463191_6480072355032308592_n-e1472647326318.jpg"
+  },
+  "plan": [
+    {
+      "image": "https://welcometoangola.co.ao/wp-content/uploads/2021/01/cms-image-000009649.jpg"
+    },
+    {
+      "image": "https://www.uccla.pt/sites/default/files/styles/1160_x_480/public/imagens/noticias/ao_huambo_estufa-fria-huambo-1728x800_c.jpg?itok=v0z75hhy"
+    },
+    {
+      "image": "https://www.conexaolusofona.org/wp-content/uploads/2019/02/moamba-de-galinha-1024x683.jpg"
+    },
+    {
+      "image": "https://www.hoteisangola.com/components/com_reservations/gallery/s1/hotels/large/g7/pululukwa%20-%20_o9a7572-1.jpg"
+    }
+  ]
+}
